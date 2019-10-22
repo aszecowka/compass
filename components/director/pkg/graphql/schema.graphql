@@ -40,6 +40,7 @@ enum DocumentFormat {
 	MARKDOWN
 }
 
+
 enum EventSpecType {
 	ASYNC_API
 }
@@ -184,7 +185,7 @@ input FetchRequestInput {
 	filter: String
 }
 
-input IntegrationSystemInput {
+input ApplicationsDelegateInput {
 	name: String!
 	description: String
 }
@@ -410,15 +411,15 @@ type HealthCheckPage implements Pageable {
 	totalCount: Int!
 }
 
-type IntegrationSystem {
+type ApplicationsDelegate {
 	id: ID!
 	name: String!
 	description: String
 	auths: [SystemAuth!]!
 }
 
-type IntegrationSystemPage implements Pageable {
-	data: [IntegrationSystem!]!
+type ApplicationsDelegatePage implements Pageable {
+	data: [ApplicationsDelegate!]!
 	pageInfo: PageInfo!
 	totalCount: Int!
 }
@@ -528,8 +529,8 @@ type Query {
 	"""
 	Maximum `first` parameter value is 100
 	"""
-	integrationSystems(first: Int = 100, after: PageCursor): IntegrationSystemPage! @hasScopes(path: "graphql.query.integrationSystems")
-	integrationSystem(id: ID!): IntegrationSystem @hasScopes(path: "graphql.query.integrationSystem")
+    applicationsDelegates(first: Int = 100, after: PageCursor): ApplicationsDelegatePage! @hasScopes(path: "graphql.query.integrationSystems")
+	applicationsDelegate(id: ID!): ApplicationsDelegate @hasScopes(path: "graphql.query.integrationSystem")
 }
 
 type Mutation {
@@ -539,9 +540,9 @@ type Mutation {
 	addRuntime(in: RuntimeInput!): Runtime! @hasScopes(path: "graphql.mutation.createRuntime")
 	updateRuntime(id: ID!, in: RuntimeInput!): Runtime! @hasScopes(path: "graphql.mutation.updateRuntime")
 	deleteRuntime(id: ID!): Runtime! @hasScopes(path: "graphql.mutation.deleteRuntime")
-	addIntegrationSystem(in: IntegrationSystemInput!): IntegrationSystem! @hasScopes(path: "graphql.mutation.createIntegrationSystem")
-	updateIntegrationSystem(id: ID!, in: IntegrationSystemInput!): IntegrationSystem! @hasScopes(path: "graphql.mutation.updateIntegrationSystem")
-	deleteIntegrationSystem(id: ID!): IntegrationSystem! @hasScopes(path: "graphql.mutation.deleteIntegrationSystem")
+	addApplicationsDelegate(in: ApplicationsDelegateInput!): ApplicationsDelegate! @hasScopes(path: "graphql.mutation.createIntegrationSystem")
+	updateApplicationsDelegate(id: ID!, in: ApplicationsDelegateInput!): ApplicationsDelegate! @hasScopes(path: "graphql.mutation.updateIntegrationSystem")
+	deleteApplicationsDelegate(id: ID!): ApplicationsDelegate! @hasScopes(path: "graphql.mutation.deleteIntegrationSystem")
 	addWebhook(applicationID: ID!, in: WebhookInput!): Webhook! @hasScopes(path: "graphql.mutation.addWebhook")
 	updateWebhook(webhookID: ID!, in: WebhookInput!): Webhook! @hasScopes(path: "graphql.mutation.updateWebhook")
 	deleteWebhook(webhookID: ID!): Webhook! @hasScopes(path: "graphql.mutation.deleteWebhook")
@@ -553,10 +554,10 @@ type Mutation {
 	requestOneTimeTokenForApplication(id: ID!): OneTimeToken! @hasScopes(path: "graphql.mutation.generateOneTimeTokenForApplication")
 	requestClientCredentialsForRuntime(id: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.generateClientCredentialsForRuntime")
 	requestClientCredentialsForApplication(id: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.generateClientCredentialsForApplication")
-	requestClientCredentialsForIntegrationSystem(id: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.generateClientCredentialsForIntegrationSystem")
+	requestClientCredentialsForApplicationsDelegate(id: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.generateClientCredentialsForIntegrationSystem")
 	invalidateSystemAuthForRuntime(authID: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.deleteSystemAuthForRuntime")
 	invalidateSystemAuthForApplication(authID: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.deleteSystemAuthForApplication")
-	invalidateSystemAuthForIntegrationSystem(authID: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.deleteSystemAuthForIntegrationSystem")
+	invalidateSystemAuthForApplicationsDelegate(authID: ID!): SystemAuth! @hasScopes(path: "graphql.mutation.deleteSystemAuthForIntegrationSystem")
 	"""
 	Sets Auth for given Application and Runtime. To set default Auth for API, use updateAPI mutation
 	"""
